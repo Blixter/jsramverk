@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Hepta+Slab:500|Manjari&display=swap');
+
+html {
+    font-size: 100%;
+    font-family: 'Manjari', sans-serif;
+}
+
+.App {
+    width: 62em;
+    margin: 0 auto;
+    padding: 2em 6em 6em;
+    background-color: #d2deff;
+    color: rgb(34, 34, 34);
+}
+
+nav {
+    text-align: center;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Hepta Slab', serif;
+}
+
+h1 {
+    font-size: 7em;
+    font-weight: 100;
+}
+
+h2 {
+    font-size: 6em;
+    font-weight: 100;
+}
+
+p {
+    font-size: 1.6em;
+    font-weight: normal;
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+    margin-right: 1em;
+}
+
+li a {
+    text-decoration: none;
+    color: rgb(34, 34, 34);
+    font-size: 2em;
+}
+
+li a:hover {
+    text-decoration: underline;
+    text-decoration-color: #4160eb;
+}
+
+h2 {
+  text-transform: uppercase;
+}
