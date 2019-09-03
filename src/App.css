@@ -17,6 +17,10 @@ nav {
     text-align: center;
 }
 
+code {
+    font-size: 1.6em;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Hepta Slab', serif;
 }
@@ -27,12 +31,12 @@ h1 {
 }
 
 h2 {
-    font-size: 6em;
+    font-size: 3em;
     font-weight: 100;
 }
 
 p {
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: normal;
     margin-bottom: 1em;
 }
@@ -55,8 +59,4 @@ li a {
 li a:hover {
     text-decoration: underline;
     text-decoration-color: #4160eb;
-}
-
-h2 {
-  text-transform: uppercase;
 }
