@@ -1,7 +1,7 @@
 # Vecka 2
 
 Vecka 2 och jag har nu arbetat med ett registreringsformulär samt en date-picker.
-Jag valde att göra ungefär som Gmails date-picker för födelsedatum. Det blir det smidigaste sättet tycker jag. Eftersom man först kan välja månad i dropdown-menyn, sedan är det bara att tabba och skriva dag och år. Jag gjorde input-fältet för dagen lite mindre och året lite större, för att användaren skall förstå att året skall skrivas med fler siffror, alltså YYYY. Som input valde jag självklart 'number'. Det finns mer jobb att göra för att den skall stämma helt och hållet. Till exempel så går det att fylla i 1 - 31 dagar för varje månad. Jag har gjort så att det inte blir validerat om man fyller i utöver 1 - 31 i dagar, samt om man inte håller sig innanför 1900 - nuvarande år.
+Jag valde att göra ungefär som Gmails date-picker för födelsedatum. Det blir det smidigaste sättet tycker jag. Eftersom man först kan välja månad i dropdown-menyn, sedan är det bara att tabba och skriva dag och år. Jag gjorde input-fältet för dagen lite mindre och året lite större, för att användaren skall förstå att året skall skrivas med fler siffror, alltså YYYY. Som input valde jag självklart 'number'. Det finns mer jobb att göra för att den skall stämma helt och hållet. Till exempel så går det att fylla i 1 - 31 dagar för varje månad. Jag har gjort så att det inte blir validerat om användaren skriver utanför 1 - 31 i dagar, samt om man inte håller sig innanför 1900 - nuvarande år.
 
 ![Gmail birtdaypicker](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0fcc8342-0348-4e5d-ae39-7103035e9e0d/gmail-birthday-input-2-800w-opt.png "Gmails version") Gmails version
 
