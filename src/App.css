@@ -60,3 +60,12 @@ li a:hover {
     text-decoration: underline;
     text-decoration-color: #4160eb;
 }
+
+@media only screen and (max-width: 600px) {
+    .App {
+      margin: 0 auto;
+      padding: 1em 3em 3em;
+      width: 100%;
+      overflow: hidden;
+    }
+}
