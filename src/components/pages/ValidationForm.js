@@ -211,7 +211,7 @@ class ValidateForm extends Component {
             </div>
             <div className="createAccount">
               <button type="submit" disabled={!formValid(this.state)}>Create Account</button>
-              <small>Already Have an Account?</small>
+              {/* <small>Already Have an Account?</small> */}
             </div>
           </form>
         </div>
