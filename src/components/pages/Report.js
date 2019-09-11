@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Week1 from './Week1.js';
+import Week2 from './Week2.js';
 import ErrorMessage from './../ErrorMessage.js';
 
 
@@ -26,12 +27,17 @@ class Report extends Component {
     const weekNumber = this.state.week;
     let reportText;
     
-    if(parseInt(weekNumber) === 1) {
-      reportText = < Week1 />;
-    } else {
-      reportText = < ErrorMessage />;
+    switch(parseInt(weekNumber)) {
+      case 1:
+        reportText = < Week1 />;
+        break;
+      case 2:
+        reportText = < Week2 />;
+        break;
+      default:
+        reportText = < ErrorMessage />;
+        break;
     }
-
     return (
       <main>
          { reportText }

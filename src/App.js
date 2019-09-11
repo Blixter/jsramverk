@@ -16,6 +16,7 @@ class App extends Component {
             <ul>
               <li><Link to="/">Me</Link></li>
               <li><Link to="/reports/week/1">Week 1</Link></li>
+              <li><Link to="/reports/week/2">Week 2</Link></li>
               <li><Link to="/register">Register</Link></li>
             </ul>
           </nav>
