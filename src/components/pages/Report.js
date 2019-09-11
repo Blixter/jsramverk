@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Week1 from './Week1.js';
-import ErrorMessage from './ErrorMessage.js';
+import ErrorMessage from './../ErrorMessage.js';
 
 
 class Report extends Component {
