@@ -63,9 +63,47 @@ li a:hover {
 
 @media only screen and (max-width: 600px) {
     .App {
-      margin: 0 auto;
-      padding: 1em 3em 3em;
-      width: 100%;
-      overflow: hidden;
+      margin-left: 0px;
+      margin-right: 0px;
+      width: auto;
+      padding: 0px;
+      /* width: 100%; */
+      /* overflow: hidden; */
+      position: relative;
+    }
+
+    .nav {
+        margin-left: 0px;
+        margin-right: 0 px;
+        width: 100%;
+        padding: 0px;
+        /* width: 100%; */
+        overflow: hidden;
+        position: fixed;
+    }
+
+    li a {
+        font-size: 1.5em;
+    }
+
+    .main {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 3.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    img {
+        width: 100%;
     }
 }
