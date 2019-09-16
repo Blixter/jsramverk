@@ -67,8 +67,6 @@ li a:hover {
       margin-right: 0px;
       width: auto;
       padding: 0px;
-      /* width: 100%; */
-      /* overflow: hidden; */
       position: relative;
     }
 
@@ -77,7 +75,6 @@ li a:hover {
         margin-right: 0 px;
         width: 100%;
         padding: 0px;
-        /* width: 100%; */
         overflow: hidden;
         position: fixed;
     }
