@@ -1,49 +1,36 @@
-import React, { Component } from 'react';
-import Week1 from './Week1.js';
-import Week2 from './Week2.js';
-import ErrorMessage from './../ErrorMessage.js';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
+const ReactMarkdown = require('react-markdown/with-html')
 
-class Report extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      week: props.match.params.week
-    };
-  }
+const Report = ({ match }) => {
+  const week = match.params.week;
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const [text, setText] = useState();
 
-  // Update state if new params.
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.match.params.week !== prevState.week){
-      const currentWeek = nextProps.match.params.week
-      return {
-         week: currentWeek 
-       }
-   }
-   return null;
- }
+  useEffect(() => {
+    axios.get(`https://me-api.blixter.me/reports/${week}`,
+    { headers: {"x-access-token" : `${userData.token}`} })
+      .then(res => setText(res.data.text));
+  });
 
-  render() {
-    const weekNumber = this.state.week;
-    let reportText;
-    
-    switch(parseInt(weekNumber)) {
-      case 1:
-        reportText = < Week1 />;
-        break;
-      case 2:
-        reportText = < Week2 />;
-        break;
-      default:
-        reportText = < ErrorMessage />;
-        break;
+  function addOrEdit () {
+    if (text) {
+      return "edit"
     }
-    return (
-      <main>
-         { reportText }
-      </main>
-    );
+    return "add"
   }
-}
 
+  console.log(typeof text);
+  return (
+      <main>
+        <Link to={ `/${addOrEdit()}/${week}`}>{addOrEdit().toUpperCase()}</Link>
+        <ReactMarkdown 
+          source={text}
+          escapeHtml={false}
+        />
+      </main>
+  )
+}
 export default Report;

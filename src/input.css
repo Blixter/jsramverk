@@ -1,0 +1,14 @@
+input.error,
+select.error {
+  border: 1px solid red;
+}
+
+input.correct,
+select.correct {
+  border: 1px solid #519e8a;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.6em;
+}

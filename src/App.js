@@ -3,26 +3,39 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import Me from './components/pages/Me';
 import Report from './components/pages/Report';
+import Edit from './components/pages/Edit';
+import Add from './components/pages/Add';
 import ValidationForm from './components/pages/ValidationForm';
+import Login from './components/pages/Login';
+import Weeks from './components/pages/Weeks';
 
-import './App.css';
+import './input.css';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <nav>
-            <ul>
-              <li><Link to="/">Me</Link></li>
-              <li><Link to="/reports/week/1">Week 1</Link></li>
-              <li><Link to="/reports/week/2">Week 2</Link></li>
-              <li><Link to="/register">Register</Link></li>
+          <nav className="navbar navbar-expand-sm navbar-light bg-light">
+            <ul className="navbar-nav">
+              <li className="nav-item"><Link className="nav-link" to="/">Me</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/reports">Reports</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
             </ul>
           </nav>
-          <Route exact path="/" component={Me} />
-          <Route path="/reports/week/:week" component={Report} />
-          <Route path="/register" component={ValidationForm} />
+          <div className="row">
+            <div class="col-sm"></div>
+            <div class="col-sm-6">
+            <Route exact path="/" component={Me} />
+            {/* <Route path="/reports/week/:week" component={Report} /> */}
+            <Route exact path="/reports" component={Weeks} />
+            <Route path="/register" component={ValidationForm} />
+            <Route path="/Login" component={Login} />
+            <Route path="/reports/week/:week" component={Report} />
+            <Route path="/edit/:week" component={Edit} />
+            <Route path="/add/:week" component={Add} />
+            </div>
+            <div class="col-sm"></div>
         </div>
       </Router>
     );

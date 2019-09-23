@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
+const ReactMarkdown = require('react-markdown/with-html')
 
 
 class Me extends Component {
@@ -9,20 +10,24 @@ class Me extends Component {
     this.state = {message: ''};
   }
 
+
   componentDidMount() {
-    // Get the contents from the Me-api put them in the React state, so we can reference it in render() below.
-    fetch('http://me-api.blixter.me/')
-    .then(res => res.json())
-    .then(res => this.setState({ 
-      message: res[0].description
-      }))
+    axios.get('https://me-api.blixter.me/')
+      .then(res => 
+        this.setState({
+          message: res.data[0].description
+        }))
   }
+
   render() {
   const { message } = this.state;
   return (
     <main>
       <h1>Me</h1>
-      <html>{message}</html>
+      <ReactMarkdown 
+        source={message}
+        escapeHtml={false}
+      />
     </main>
     );
   }
