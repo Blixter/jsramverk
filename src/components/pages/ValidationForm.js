@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import DatePicker from './../DatePickers';
-// import './../../form.css';
 import axios from 'axios';
 
 export function minTwoDigits(n) {
@@ -136,7 +135,6 @@ class ValidateForm extends Component {
               <input
                 type="text"
                 className={formErrors.firstName.length > 0 ? "error form-control" : this.state.firstName ? "correct form-control" : "form-control"}
-                // className="form-control"
                 placeholder="First Name"
                 name="firstName"
                 noValidate
@@ -164,7 +162,6 @@ class ValidateForm extends Component {
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  // className="form-control"
                   className={formErrors.email.length > 0 ? "error form-control" : this.state.email ? "correct form-control" : "form-control"}
                   placeholder="Email"
                   name="email"
