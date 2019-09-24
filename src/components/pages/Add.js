@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class Add extends Component {
@@ -9,7 +9,8 @@ class Add extends Component {
     this.state = {
       week: props.match.params.week,
       text: '',
-      userData: JSON.parse(localStorage.getItem("user"))
+      userData: JSON.parse(localStorage.getItem("user")),
+      redirect: false
       }
     };
 
@@ -21,7 +22,10 @@ class Add extends Component {
       text: this.state.text,
     },
     { headers: {"x-access-token" : `${this.state.userData.token}`} })
-    .then(res => console.log('Success:', JSON.stringify(res)))
+    .then(alert('Added to the database'))
+    .then(this.setState({
+      redirect: true
+    }))
     .catch(error => console.error('Error:', error))
   };
 
@@ -33,13 +37,17 @@ class Add extends Component {
   };
 
   render() {
+    // When changes has been saved to the DB, redirect.
+    if (this.state.redirect) {
+      return (<Redirect to={`/reports/week/${this.state.week}`} />)
+    }
     return (
       <main>
         <div className="wrapper">
           <div className="form-wrapper-edit">
             <h1>Add</h1>
             <form onSubmit={this.handleSubmit}>
-            <div class="form-group">
+            <div className="form-group">
               <label htmlFor="content">Content</label>
               <textarea 
                 name="content" 

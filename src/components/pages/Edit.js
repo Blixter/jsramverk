@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -9,13 +10,12 @@ class Edit extends Component {
     this.state = {
       week: props.match.params.week,
       text: '',
-      userData: JSON.parse(localStorage.getItem("user"))
+      userData: JSON.parse(localStorage.getItem("user")),
+      redirect: false
       }
     };
 
   componentDidMount() {
-    console.log("week " + this.state.week)
-    console.log("userData " + this.state.userData.token)
     axios.get(`https://me-api.blixter.me/reports/${this.state.week}`,
     { headers: {"x-access-token" : `${this.state.userData.token}`} })
       .then(res => this.setState({
@@ -25,14 +25,16 @@ class Edit extends Component {
   }
 
   handleSubmit = e => {
-    console.log(this.state.week, this.state.text);
     e.preventDefault();
     axios.put('https://me-api.blixter.me/reports', {
       id: this.state.week,
       text: this.state.text,
     },
     { headers: {"x-access-token" : `${this.state.userData.token}`} })
-    .then(res => console.log('Success:', JSON.stringify(res)))
+    .then(alert('Changes saved'))
+    .then(this.setState({
+      redirect: true
+    }))
     .catch(error => console.error('Error:', error))
   };
 
@@ -43,15 +45,18 @@ class Edit extends Component {
 
   };
 
-
   render() {
+    // When changes has been saved to the DB, redirect.
+    if (this.state.redirect) {
+      return (<Redirect to={`/reports/week/${this.state.week}`} />)
+    }
     return (
       <main>
         <div className="wrapper">
           <div className="form-wrapper-edit">
             <h1>Edit</h1>
             <form onSubmit={this.handleSubmit}>
-              <div class="form-group">
+              <div className="form-group">
               <label htmlFor="content">Content</label>
               <textarea 
                 name="content" 
@@ -62,7 +67,7 @@ class Edit extends Component {
                 required
               />
               </div>
-              <div class="form-group">
+              <div className="form-group">
               <label htmlFor="week">Week</label>
               <input
                 value={this.state.week}

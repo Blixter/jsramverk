@@ -25,10 +25,9 @@ class App extends Component {
             </ul>
           </nav>
           <div className="row">
-            <div class="col-sm"></div>
-            <div class="col-sm-6">
+            <div className="col-sm"></div>
+            <div className="col-sm-6">
             <Route exact path="/" component={Me} />
-            {/* <Route path="/reports/week/:week" component={Report} /> */}
             <Route exact path="/reports" component={Weeks} />
             <Route path="/register" component={ValidationForm} />
             <Route path="/Login" component={Login} />
@@ -36,7 +35,7 @@ class App extends Component {
             <Route path="/edit/:week" component={Edit} />
             <Route path="/add/:week" component={Add} />
             </div>
-            <div class="col-sm"></div>
+            <div className="col-sm"></div>
         </div>
       </Router>
     );

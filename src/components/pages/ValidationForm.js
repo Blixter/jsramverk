@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import DatePicker from './../DatePickers';
 import axios from 'axios';
@@ -51,6 +52,9 @@ class ValidateForm extends Component {
         day: "",
         year: "",
         gdpr: ""
+      },
+      page: {
+        redirect: false
       }
     };
   }
@@ -71,7 +75,14 @@ class ValidateForm extends Component {
           email: this.state.email,
           password: this.state.password
         })
-        .then(res => console.log('Success:', JSON.stringify(res)))
+        .then(res => {
+          alert(res.data.data.message);
+          if(res.statusText === "Created") {
+              this.setState({
+                redirect: true
+              })
+          }
+        })
         .catch(error => console.error('Error:', error))
       );
     }
@@ -109,7 +120,7 @@ class ValidateForm extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value });
   };
 
   handleCheckBoxClick = e => {
@@ -125,6 +136,10 @@ class ValidateForm extends Component {
 
   render() {
     const { formErrors } = this.state;
+    // If registered were successfull redirect to '/login'
+    if (this.state.redirect) {
+      return (<Redirect to={'/login'} />)
+    }
 
     return (
       <div className="Wrapper">
@@ -192,16 +207,13 @@ class ValidateForm extends Component {
                 )}
               </div>
               <div className="checkbox">
-                <label><input
+                <label className="noMargin"><input
                   type="checkbox"
                   name="gdpr"
                   onChange={this.handleCheckBoxClick}
                   checked={this.state.gdpr}
                 />By checking this you agree that your personal data will be stored in our database.
                 </label>
-                {formErrors.gdpr.length > 0 && (
-                  <span className="errorMessage">{formErrors.gdpr}</span>
-                )}
                 </div>
             <div className="createAccount">
               <button type="submit" className="btn btn-primary" disabled={!formValid(this.state)}>Create Account</button>

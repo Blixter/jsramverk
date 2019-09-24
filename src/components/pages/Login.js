@@ -59,7 +59,7 @@ class Login extends Component {
             })
         }
       })
-      .catch(error => console.error('Error:', error))
+      .catch(error => alert(error))
     } else {
       for (var prop in this.state.formErrors) {
         if (this.state.formErrors[prop]) {
@@ -84,7 +84,7 @@ class Login extends Component {
       default:
         break;
     }
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value });
   };
 
   render() {

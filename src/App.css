@@ -21,7 +21,14 @@ h2 {
 
 p {
     font-family: 'Hepta Slab', serif;
-    font-size: 1.4em;
     font-weight: normal;
     margin-bottom: 1em;
+}
+
+nav {
+    margin-bottom: 4rem;
+}
+
+.no-margin-top {
+    margin-top: 0;
 }
