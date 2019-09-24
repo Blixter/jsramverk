@@ -21,8 +21,6 @@ const Report = ({ match }) => {
     }
     return "add"
   }
-
-  console.log(typeof text);
   return (
       <main>
         <ReactMarkdown 
