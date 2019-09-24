@@ -207,7 +207,7 @@ class ValidateForm extends Component {
                 )}
               </div>
               <div className="checkbox">
-                <label className="noMargin"><input
+                <label><input
                   type="checkbox"
                   name="gdpr"
                   onChange={this.handleCheckBoxClick}
