@@ -5,22 +5,6 @@ html {
     font-family: 'Manjari', sans-serif;
 }
 
-.App {
-    width: 62em;
-    margin: 0 auto;
-    padding: 2em 6em 6em;
-    background-color: #d2deff;
-    color: rgb(34, 34, 34);
-}
-
-nav {
-    text-align: center;
-}
-
-code {
-    font-size: 1.6em;
-}
-
 h1, h2, h3, h4 {
     font-family: 'Hepta Slab', serif;
 }
@@ -36,71 +20,8 @@ h2 {
 }
 
 p {
+    font-family: 'Hepta Slab', serif;
     font-size: 1.4em;
     font-weight: normal;
     margin-bottom: 1em;
-}
-
-ul {
-    list-style-type: none;
-}
-
-li {
-    display: inline;
-    margin-right: 1em;
-}
-
-li a {
-    text-decoration: none;
-    color: rgb(34, 34, 34);
-    font-size: 2em;
-}
-
-li a:hover {
-    text-decoration: underline;
-    text-decoration-color: #4160eb;
-}
-
-@media only screen and (max-width: 600px) {
-    .App {
-      margin-left: 0px;
-      margin-right: 0px;
-      width: auto;
-      padding: 0px;
-      position: relative;
-    }
-
-    .nav {
-        margin-left: 0px;
-        margin-right: 0 px;
-        width: 100%;
-        padding: 0px;
-        overflow: hidden;
-        position: fixed;
-    }
-
-    li a {
-        font-size: 1.5em;
-    }
-
-    .main {
-        margin-left: 0px;
-        margin-right: 0px;
-        width: 100%;
-        padding-right: 0px;
-        padding-left: 0px;
-        position: relative;
-    }
-
-    h1 {
-        font-size: 3.5em;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    img {
-        width: 100%;
-    }
 }
