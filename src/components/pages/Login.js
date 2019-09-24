@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-// import './../../form.css';
 
 const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
@@ -35,6 +34,7 @@ class Login extends Component {
       email: null,
       password: null,
       result: "",
+      redirect: false,
       formErrors: {
         email: "",
         password: "",
@@ -54,6 +54,9 @@ class Login extends Component {
         alert(res.data.message);
         if(res.data.token) {
             localStorage.setItem('user', JSON.stringify(res.data))
+            this.setState({
+              redirect: true
+            })
         }
       })
       .catch(error => console.error('Error:', error))
@@ -86,9 +89,8 @@ class Login extends Component {
 
   render() {
     const { formErrors } = this.state;
-    // If logged in redirect to....
-    if (localStorage.getItem("user")) {
-      
+    // If logged in redirect to '/reports'
+    if (localStorage.getItem("user") || this.state.redirect) {
       return (<Redirect to={'/reports'} />)
     }
 
@@ -97,11 +99,11 @@ class Login extends Component {
         <div className="form-wrapper">
           <h1>Log in</h1>
           <form onSubmit={this.handleSubmit} noValidate>
-            <div className="email">
+            <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
-                className={formErrors.email.length > 0 ? "error" : this.state.email ? "correct" : null}
+                className={formErrors.email.length > 0 ? "error form-control" : this.state.email ? "correct form-control" : "form-control"}
                 placeholder="Email"
                 name="email"
                 noValidate
@@ -111,11 +113,11 @@ class Login extends Component {
                 <span className="errorMessage">{formErrors.email}</span>
               )}
             </div>
-            <div className="password">
+            <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                className={formErrors.password.length > 0 ? "error" : this.state.password ? "correct" : null}
+                className={formErrors.password.length > 0 ? "error form-control" : this.state.password ? "correct form-control" : "form-control"}
                 placeholder="Password"
                 name="password"
                 noValidate
@@ -125,8 +127,8 @@ class Login extends Component {
                 <span className="errorMessage">{formErrors.password}</span>
               )}
             </div>
-            <div className="createAccount">
-              <button type="submit" disabled={!formValid(this.state)}>Login</button>
+            <div className="login">
+              <button type="submit" className="btn btn-primary" disabled={!formValid(this.state)}>Login</button>
             </div>
           </form>
         </div>

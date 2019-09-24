@@ -9,6 +9,7 @@ import ValidationForm from './components/pages/ValidationForm';
 import Login from './components/pages/Login';
 import Weeks from './components/pages/Weeks';
 
+import './App.css';
 import './input.css';
 
 class App extends Component {

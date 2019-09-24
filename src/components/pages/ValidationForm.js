@@ -199,13 +199,12 @@ class ValidateForm extends Component {
                   checked={this.state.gdpr}
                 />By checking this you agree that your personal data will be stored in our database.
                 </label>
-                </div>
                 {formErrors.gdpr.length > 0 && (
                   <span className="errorMessage">{formErrors.gdpr}</span>
                 )}
+                </div>
             <div className="createAccount">
               <button type="submit" className="btn btn-primary" disabled={!formValid(this.state)}>Create Account</button>
-              {/* <small>Already Have an Account?</small> */}
             </div>
           </form>
         </div>
