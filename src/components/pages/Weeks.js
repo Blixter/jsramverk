@@ -40,7 +40,7 @@ const Weeks = () => {
             <Link to="/reports/week/5">Länk till redovisningstexten</Link>
           </div>
           <div className="col-lg-4">
-            <h2>Kmom05</h2>
+            <h2>Kmom06</h2>
             <Link to="/reports/week/6">Länk till redovisningstexten</Link>
           </div>
         </div>
