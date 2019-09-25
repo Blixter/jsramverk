@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const ReactMarkdown = require('react-markdown/with-html')
+const ReactMarkdown = require('react-markdown')
 
 const Report = ({ match }) => {
   const week = match.params.week;
@@ -25,7 +25,6 @@ const Report = ({ match }) => {
       <main>
         <ReactMarkdown 
           source={text}
-          escapeHtml={false}
         />
         <Link to={ `/${addOrEdit()}/${week}`}>{addOrEdit().toUpperCase()}</Link>
       </main>
