@@ -63,7 +63,7 @@ class Add extends Component {
               </div>
             </form>
           </div>
-        </div>        
+        </div>
       </main>
 
     );
