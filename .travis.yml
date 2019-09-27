@@ -1,0 +1,12 @@
+language: javascript
+
+sudo: false
+
+git:
+    submodules: false
+
+before_script:
+    - npm install
+
+script:
+    - npm test
