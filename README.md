@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Blixter/jsramverk.svg?branch=master)](https://travis-ci.org/Blixter/jsramverk)
+
+
 # Jsramverk
 
 ## Available Scripts
