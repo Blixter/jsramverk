@@ -71,7 +71,7 @@ class Weeks extends Component {
         <div className="row">
           <div className="col-lg-4">
             <h2>Kmom04</h2>
-            <p>Vecka 4 fokuserar på testning, så som enhetstestning, intergrationstestning och funtkionstestning.</p>
+            <p>Fokuserar på testning - enhetstestning, intergrationstestning och funtkionstestning.</p>
             <Link to="/reports/week/4">Länk till redovisningstexten</Link>
           </div>
           <div className="col-lg-4">
