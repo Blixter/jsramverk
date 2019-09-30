@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
-const Weeks = () => {
-  // If not logged in redirect to '/login'
-  if (!localStorage.getItem("user")) {
-    return (<Redirect to={'/login'} />)
+
+class Weeks extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      userData: JSON.parse(localStorage.getItem("user")),
+      redirect: false
+    };
   }
+
+    componentDidMount() {
+        if (this.state.userData) {
+            // Check if the stored token still is valid.
+            // Remove the token and redirect to '/login' if it's not valid.
+            axios.get(`https://me-api.blixter.me/auth/check`,
+            { headers: {"x-access-token" : `${this.state.userData.token}`} })
+            .then(res => {
+                if (res.status === 200) {
+                console.log(res.data.message)
+                }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              localStorage.removeItem("user");
+              this.setState({
+                redirect: true
+              })
+            })
+        } else {
+          localStorage.removeItem("user");
+          this.setState({
+            redirect: true
+          })
+        }
+      };
+
+  render() {
+    // If token not valid or token not found, redirect to '/login'
+    if (this.state.redirect) {
+      return (<Redirect to={'/login'} />)
+    }
   return (
-      <main>
+    <main>
         <h1>Reports</h1>
         <p>Här samlar jag veckornas alla redovisningstexter, det är även här jag kan gå in och redigera samt lägga till nya texter.</p>
         <p>Kursen läses på Blekinge Tekniska Högskola, som ingår i programmet Webbprogrammering. <a href="https://jsramverk.me/">https://jsramverk.me/</a></p>
@@ -33,6 +71,7 @@ const Weeks = () => {
         <div className="row">
           <div className="col-lg-4">
             <h2>Kmom04</h2>
+            <p>Vecka 4 fokuserar på testning, så som enhetstestning, intergrationstestning och funtkionstestning.</p>
             <Link to="/reports/week/4">Länk till redovisningstexten</Link>
           </div>
           <div className="col-lg-4">
@@ -45,6 +84,7 @@ const Weeks = () => {
           </div>
         </div>
       </main>
-  )
+    )
+    }
 }
 export default Weeks;
