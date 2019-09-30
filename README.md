@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/Blixter/jsramverk.svg?branch=master)](https://travis-ci.org/Blixter/jsramverk)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Blixter/jsramverk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Blixter/jsramverk/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/Blixter/jsramverk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Blixter/jsramverk/build-status/master)
+
 # Jsramverk
 
 ## Available Scripts
