@@ -8,6 +8,7 @@ import Add from './components/pages/Add';
 import ValidationForm from './components/pages/ValidationForm';
 import Login from './components/pages/Login';
 import Weeks from './components/pages/Weeks';
+import Chat from './components/pages/ChatHooks';
 
 import './App.css';
 import './input.css';
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path="/reports/week/:week" component={Report} />
             <Route path="/edit/:week" component={Edit} />
             <Route path="/add/:week" component={Add} />
+            <Route path="/chat" component={Chat} />
             </div>
             <div className="col-sm"></div>
         </div>
