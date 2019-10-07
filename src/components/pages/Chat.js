@@ -1,102 +1,111 @@
-// import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
-// import io from 'socket.io-client';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 
-// import axios from 'axios';
+import Messages from '../Messages';
+import Input from '../Input';
 
-// const socketUrl = "https://socket-server.blixter.me";
+let socket;
 
-// function getTime() {
-//   return new Date().toLocaleTimeString('en-GB', { hour: "numeric", 
-//       minute: "numeric"});    
-// }
+const Chat = () => {
+    const [name, setName] = useState('');
+    const server = 'https://socket-server.blixter.me'
+    const [message, setMessage] = useState('')
+    const [time, setTime] = useState('')
+    const [messages, setMessages] = useState([])
+    const [nameSent, setNameSent] = useState(false);
 
-// // Write users own message directly to chat.
-// function addChatMessage(data) {
-//   let addedMessage = document.createElement("p");
+    const formValid = (name) => {
+        let valid = true;
 
-//   addedMessage.textContent = data.time + " " + data.username + ": " + data.message;
+        // Validate form not being empty
+          name.length > 0 && (valid = false);
 
-//   allMessages.appendChild(addedMessage);
-// }
+        // Validate the form was filled out
+          name === null && (valid = false);
+          name === false && (valid = false);
 
-// class Chat extends Component {
-//   constructor(props) {
-//     super(props);
+        return valid;
+      }
 
-//     this.state = {
-//       socket: null,
-//       user: null,
-//       participantsMessage: null,
-//       chatMessages: null
-//       }
-//     };
+    useEffect(() => {
+        socket = io(server);
 
-//     componentDidMount() {
-//       this.initSocket();
-//     };
+        return () => {
+            socket.emit('disconnect');
 
-//   initSocket = () => {
-//     const socket = io(socketUrl);
-//     socket.on('connect', () => {
-//       console.log("Connected");
-//     })
-//     this.setState({socket});
-//   };
+            socket.off();
+        }
+    }, [server]);
 
-//   setParticipantsMessage = (participantsMessage) => {
-//     const { socket } = this.state
-//     socket.on('user joined', (data) => {
-//       this.setState({user})
-//       log(participantsMessage);
-//     })
-//   };
+    useEffect( () => {
+        // Receiving new message from the server.
+        socket.on('new message', (message) => {
+            setMessages([...messages, message]);
+        });
 
-//   newMessage = (message) => {
-//     this.setState(prevState => ({
-//       messages: prevState.message, message
-//     })
-//   }
+    }, [messages]);
 
+    // function for sending username
+    const sendName = (event) => {
+        event.preventDefault();
+        setName(name);
+        setNameSent(true);
+        if(name) {
+            socket.emit("add user", name);
+        }
+    }
 
-//   // handleSubmit = e => {
-//   //   e.preventDefault();
-//   //   axios.put('https://me-api.blixter.me/reports', {
-//   //     id: this.state.week,
-//   //     text: this.state.text,
-//   //   },
-//   //   { headers: {"x-access-token" : `${this.state.userData.token}`} })
-//   //   .then(alert('Changes saved'))
-//   //   .then(this.setState({
-//   //     redirect: true
-//   //   }))
-//   //   .catch(error => console.error('Error:', error))
-//   // };
+    // function for sending messages
+        const sendMessage = (event) => {
+            event.preventDefault();
+            if(message) {
+                setMessages([...messages, {
+                    username: name,
+                    time: time,
+                    message: message
+                }]);
+                socket.emit("new message", {
+                    username: name,
+                    time: time,
+                    message: message
+                }, () => setMessage(''));
+            }
+        }
 
-//   // handleChange = e => {
-//   //   e.preventDefault();
+    // If name is not sent show this.
+    if (!nameSent) {
+        return (
+        <div className="form-wrapper">
+            <form  onSubmit={sendName} noValidate>
+                <div className="form-group">
+                    <h1>Chat</h1>
+                    <label htmlFor="user">Username</label>
+                    <input 
+                    name="user"
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter a username..."
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    />
+                </div>
+                <div className="send">
+                    <button className="btn btn-primary" type="submit" disabled={formValid(name)}>Enter chat</button>
+                    {/* onClick={e => sendName(e) */}
+                </div>
+            </form>
+        </div>
+        )
+    }
+    // If name has been set, show this.
+    return (
+        <div>
+            <div className="chat-messages bg-light">
+            <Messages messages={messages} name={name} time={time} />
+            <Input message={message} setMessage={setMessage} sendMessage={sendMessage} setTime={setTime} />
+            </div>
+        </div>
+    )
+}
 
-//   //   this.setState({text: e.target.value})
-
-//   // };
-
-//   render() {
-
-//     return (
-//       <div className="chat">
-//         <h1>Websocket chatt</h1>
-
-//         <h2>Messages:</h2>
-//         <div id="all-messages" class="all-messages"></div>
-    
-//         <p><strong>Username:</strong></p>
-//         <input id="user" class="user" value=""/>
-    
-//         <p><strong>Write new message:</strong></p>
-//         <input id="new-message" class="new-message" value=""/>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Chat;
+export default Chat;
