@@ -33,16 +33,26 @@ nav {
 
 .messages {
     overflow-y: auto;
-    height: 400px;
+    height: 80vh;
 }
 
 
 .messageBox {
-    background: #F3F3F3;
     border-radius: 20px;
     padding: 5px 20px;
     display: inline-block;
     width: 45%;
+}
+
+.card {
+    background-color: #f1f1f1;
+    border: none;
+}
+
+.card.currentUser {
+    border-color: #ccc;
+    background-color: #42a5f5;
+    color: rgb(238, 238, 238);
 }
 
 .sentText {
