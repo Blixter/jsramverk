@@ -8,24 +8,24 @@ let socket;
 
 const Chat = () => {
     const [name, setName] = useState('');
-    const server = 'https://socket-server.blixter.me'
-    const [message, setMessage] = useState('')
-    const [time, setTime] = useState('')
-    const [messages, setMessages] = useState([])
+    const server = 'https://socket-server.blixter.me';
+    const [message, setMessage] = useState('');
+    const [time, setTime] = useState('');
+    const [messages, setMessages] = useState([]);
     const [nameSent, setNameSent] = useState(false);
 
     const formValid = (name) => {
         let valid = true;
 
         // Validate form not being empty
-          name.length > 0 && (valid = false);
+        name.length > 0 && (valid = false);
 
         // Validate the form was filled out
-          name === null && (valid = false);
-          name === false && (valid = false);
+        name === null && (valid = false);
+        name === false && (valid = false);
 
         return valid;
-      }
+    };
 
     useEffect(() => {
         socket = io(server);
@@ -34,15 +34,15 @@ const Chat = () => {
             socket.emit('disconnect');
 
             socket.off();
-        }
+        };
     }, [server]);
 
-    useEffect( () => {
+    useEffect(() => {
         // Receiving new message from the server.
         socket.on('new message', (message) => {
             setMessages([...messages, message]);
+            console.log(messages);
         });
-
     }, [messages]);
 
     // function for sending username
@@ -50,62 +50,70 @@ const Chat = () => {
         event.preventDefault();
         setName(name);
         setNameSent(true);
-        if(name) {
+        if (name) {
             socket.emit("add user", name);
         }
-    }
+    };
 
     // function for sending messages
-        const sendMessage = (event) => {
-            event.preventDefault();
-            if(message) {
-                setMessages([...messages, {
-                    username: name,
-                    time: time,
-                    message: message
-                }]);
-                socket.emit("new message", {
-                    username: name,
-                    time: time,
-                    message: message
-                }, () => setMessage(''));
-            }
+    const sendMessage = (event) => {
+        event.preventDefault();
+        if (message) {
+            setMessages([...messages, {
+                username: name,
+                time: time,
+                message: message
+            }]);
+            socket.emit("new message", {
+                username: name,
+                time: time,
+                message: message
+            }, () => setMessage(''));
         }
+    };
 
     // If name is not sent show this.
     if (!nameSent) {
         return (
-        <div className="form-wrapper">
-            <form  onSubmit={sendName} noValidate>
-                <div className="form-group">
-                    <h1>Chat</h1>
-                    <label htmlFor="user">Username</label>
-                    <input 
-                    name="user"
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter a username..."
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                    />
-                </div>
-                <div className="send">
-                    <button className="btn btn-primary" type="submit" disabled={formValid(name)}>Enter chat</button>
-                    {/* onClick={e => sendName(e) */}
-                </div>
-            </form>
-        </div>
-        )
+            <div className="form-wrapper">
+                <form onSubmit={sendName} noValidate>
+                    <div className="form-group">
+                        <h1>Chat</h1>
+                        <label htmlFor="user">Username</label>
+                        <input
+                            name="user"
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter a username..."
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                        />
+                    </div>
+                    <div className="send">
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                            disabled={formValid(name)}>Enter chat</button>
+                        {/* onClick={e => sendName(e) */}
+                    </div>
+                </form>
+            </div>
+        );
     }
     // If name has been set, show this.
     return (
         <div>
             <div className="chat-messages bg-light">
-            <Messages messages={messages} name={name} time={time} />
-            <Input message={message} setMessage={setMessage} sendMessage={sendMessage} setTime={setTime} />
+                <Messages messages={messages} name={name} time={time} />
+                <Input
+                    message={message}
+                    setMessage={setMessage}
+                    sendMessage={sendMessage}
+                    setTime={setTime}
+                />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Chat;
