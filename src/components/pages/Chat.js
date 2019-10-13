@@ -4,6 +4,8 @@ import io from 'socket.io-client';
 import Messages from '../Messages';
 import Input from '../Input';
 
+import axios from 'axios';
+
 let socket;
 
 const Chat = () => {
@@ -30,6 +32,10 @@ const Chat = () => {
     useEffect(() => {
         socket = io(server);
 
+        // TODO
+        // - axios get all chat messages from mongoDB.
+        // - Store them to messages.
+
         return () => {
             socket.emit('disconnect');
 
@@ -41,6 +47,13 @@ const Chat = () => {
         // Receiving new message from the server.
         socket.on('new message', (message) => {
             setMessages([...messages, message]);
+
+            // Save each new message to the database.
+            axios.post('localhost:1337/chat', {
+                name,
+                time,
+                message
+            });
             console.log(messages);
         });
     }, [messages]);
