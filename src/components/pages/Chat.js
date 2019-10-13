@@ -31,10 +31,18 @@ const Chat = () => {
 
     useEffect(() => {
         socket = io(server);
+        let data;
+        // Axios get all chat messages from mongoDB.
+        // Store them to messages.
 
-        // TODO
-        // - axios get all chat messages from mongoDB.
-        // - Store them to messages.
+        axios.get('https://me-api.blixter.me/chat')
+        .then(response => {
+            data = response.data;
+            setMessages(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
         return () => {
             socket.emit('disconnect');
@@ -47,14 +55,6 @@ const Chat = () => {
         // Receiving new message from the server.
         socket.on('new message', (message) => {
             setMessages([...messages, message]);
-
-            // Save each new message to the database.
-            axios.post('localhost:1337/chat', {
-                name,
-                time,
-                message
-            });
-            console.log(messages);
         });
     }, [messages]);
 
@@ -117,7 +117,7 @@ const Chat = () => {
     return (
         <div>
             <div className="chat-messages bg-light">
-                <Messages messages={messages} name={name} time={time} />
+                <Messages messages={messages} name={name} time={time} nameSent={nameSent} />
                 <Input
                     message={message}
                     setMessage={setMessage}
