@@ -21,7 +21,7 @@ class Weeks extends Component {
                 { headers: { "x-access-token": `${this.state.userData.token}` } })
                 .then(res => {
                     if (res.status === 200) {
-                        console.log(res.data.message)
+                        console.log(res.data.message);
                     }
                 })
                 .catch(error => {
@@ -88,6 +88,18 @@ class Weeks extends Component {
                         <h2>Kmom06</h2>
                         <p>Vi lär oss använde en NoSQL databas för att spara data.</p>
                         <Link to="/reports/week/6">Länk till redovisningstexten</Link>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-3">
+                    </div>
+                    <div className="col-lg-6">
+                        <h2>Kmom10</h2>
+                        <p>I projektet har vi skapat vår egen tradingplatorm,
+                            där vi har använt alla tekniker vi lärt oss under kursensgång.</p>
+                        <Link to="/reports/week/10">Länk till redovisningstexten</Link>
+                    </div>
+                    <div className="col-lg-3">
                     </div>
                 </div>
             </main>

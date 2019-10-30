@@ -10,7 +10,7 @@ const firefox = require('selenium-webdriver/firefox');
 // local
 // const serverUri = "http://localhost:3000";
 // travis
-const serverUri = "http://localhost:8082"
+const serverUri = "http://localhost:8082";
 const appTitle = "Robin Blixter";
 const By = webdriver.By;
 
@@ -52,7 +52,6 @@ test.describe('Me-page', function () {
             .build();
         browser.get(serverUri);
         done();
-
     });
 
     afterEach(function(done) {
@@ -91,4 +90,4 @@ test.describe('Me-page', function () {
 
         done();
     });
-})
+});

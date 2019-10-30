@@ -36,13 +36,13 @@ const Chat = () => {
         // Store them to messages.
 
         axios.get('https://me-api.blixter.me/chat')
-        .then(response => {
-            data = response.data;
-            setMessages(data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+            .then(response => {
+                data = response.data;
+                setMessages(data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         return () => {
             socket.emit('disconnect');
